@@ -26,6 +26,13 @@ namespace BusBoard.ConsoleApp
             Coordinates coordinates = GetCoordinates("NW5 1TL");
             Console.WriteLine(coordinates.longitude + ", " + coordinates.latitude);
 
+            List<StopPoint> stopPoints = GetTwoClosestStopPoints(coordinates);
+
+            foreach (var stopPoint in stopPoints)
+            {
+                Console.WriteLine(stopPoint.naptanId);
+            }
+
             Console.Read();
         }
 
@@ -52,6 +59,25 @@ namespace BusBoard.ConsoleApp
             IRestResponse<List<BusPrediction>> response = TFLClient.Execute<List<BusPrediction>>(request);
 
             return response.Data;
+        }
+
+        static List<StopPoint> GetTwoClosestStopPoints(Coordinates coords)
+        {
+            // TODO: Add API keys
+            var TFLClient = new RestClient("https://api.tfl.gov.uk");
+
+            var request = new RestRequest("StopPoint/", Method.GET);
+            request.AddParameter("stopTypes", "NaptanPublicBusCoachTram");
+            request.AddParameter("lat", coords.latitude);
+            request.AddParameter("lon", coords.longitude);
+
+            IRestResponse<StopPointResponse> response = TFLClient.Execute<StopPointResponse>(request);
+
+            List<StopPoint> stopPoints = response.Data.stopPoints;
+            List<StopPoint> orderedStopPoints = stopPoints.OrderBy(stopPoint => stopPoint.distance).ToList();
+            List<StopPoint> twoClosest = orderedStopPoints.GetRange(0, 2);
+
+            return twoClosest;
         }
     }
 }
