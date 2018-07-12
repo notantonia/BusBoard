@@ -20,10 +20,15 @@ namespace BusBoard.ConsoleApp
             var request = new RestRequest("StopPoint/{id}/Arrivals", Method.GET);
             request.AddUrlSegment("id", "490008660N");
 
-            IRestResponse response = client.Execute(request);
-            var content = response.Content;
-
-            Console.Write(content);
+            IRestResponse<List<BusPrediction>> response = client.Execute<List<BusPrediction>>(request);
+            foreach (var prediction in response.Data)
+            {
+                Console.WriteLine(
+                    "Bus: " + prediction.lineName +
+                    "\nTo: " + prediction.destinationName +
+                    "\nIn: " + Math.Round((double) prediction.timeToStation/60) + " minute(s)\n");
+            }
+            
             Console.Read();
         }
     }
