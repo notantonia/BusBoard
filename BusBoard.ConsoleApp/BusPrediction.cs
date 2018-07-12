@@ -11,5 +11,6 @@ namespace BusBoard.ConsoleApp
         public int timeToStation { get; set; }
         public string lineName { get; set; }
         public string destinationName { get; set; }
+        public string stationName { get; set; }
     }
 }

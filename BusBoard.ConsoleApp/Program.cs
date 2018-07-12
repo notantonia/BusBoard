@@ -14,23 +14,23 @@ namespace BusBoard.ConsoleApp
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            List<BusPrediction> busPredictions = GetBusPredictions("490008660N");
+            Coordinates coordinates = GetCoordinates("NW5 1TL");
+            List<StopPoint> stopPoints = GetTwoClosestStopPoints(coordinates);
+
+            List<BusPrediction> busPredictions = new List<BusPrediction>();
+            foreach (var stopPoint in stopPoints)
+            {
+                busPredictions.AddRange(GetBusPredictions(stopPoint.naptanId));
+            }
+
+            busPredictions = busPredictions.OrderBy(busPrediction => busPrediction.timeToStation).ToList();
             foreach (var prediction in busPredictions)
             {
                 Console.WriteLine(
-                    "Bus: " + prediction.lineName +
+                    "Stop: " + prediction.stationName +
+                    "\nBus: " + prediction.lineName +
                     "\nTo: " + prediction.destinationName +
                     "\nIn: " + Math.Round((double)prediction.timeToStation / 60) + " minute(s)\n");
-            }
-
-            Coordinates coordinates = GetCoordinates("NW5 1TL");
-            Console.WriteLine(coordinates.longitude + ", " + coordinates.latitude);
-
-            List<StopPoint> stopPoints = GetTwoClosestStopPoints(coordinates);
-
-            foreach (var stopPoint in stopPoints)
-            {
-                Console.WriteLine(stopPoint.naptanId);
             }
 
             Console.Read();
