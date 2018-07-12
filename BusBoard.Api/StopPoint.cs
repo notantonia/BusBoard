@@ -1,5 +1,5 @@
-﻿namespace BusBoard.ConsoleApp
-{
+﻿namespace BusBoard.Api
+{ 
     class StopPoint
     {
         public string naptanId { get; set; }

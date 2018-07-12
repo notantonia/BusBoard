@@ -1,4 +1,4 @@
-﻿namespace BusBoard.ConsoleApp
+﻿namespace BusBoard.Api
 {
     class Coordinates
     {

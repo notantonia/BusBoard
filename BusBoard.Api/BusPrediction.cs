@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusBoard.ConsoleApp
+namespace BusBoard.Api
 {
-    class BusPrediction
+    public class BusPrediction
     {
         public int timeToStation { get; set; }
         public string lineName { get; set; }
