@@ -14,14 +14,8 @@ namespace BusBoard.ConsoleApp
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            // TODO: Add API keys
-            var TFLClient = new RestClient("https://api.tfl.gov.uk");
-
-            var request = new RestRequest("StopPoint/{id}/Arrivals", Method.GET);
-            request.AddUrlSegment("id", "490008660N");
-
-            IRestResponse<List<BusPrediction>> response = TFLClient.Execute<List<BusPrediction>>(request);
-            foreach (var prediction in response.Data)
+            List<BusPrediction> busPredictions = GetBusPredictions("490008660N");
+            foreach (var prediction in busPredictions)
             {
                 Console.WriteLine(
                     "Bus: " + prediction.lineName +
@@ -45,6 +39,19 @@ namespace BusBoard.ConsoleApp
             IRestResponse<PostCodeResponse> response = postCodeClient.Execute<PostCodeResponse>(request);
 
             return response.Data.result;
+        }
+
+        static List<BusPrediction> GetBusPredictions(string stopPoint)
+        {
+            // TODO: Add API keys
+            var TFLClient = new RestClient("https://api.tfl.gov.uk");
+
+            var request = new RestRequest("StopPoint/{id}/Arrivals", Method.GET);
+            request.AddUrlSegment("id", stopPoint);
+
+            IRestResponse<List<BusPrediction>> response = TFLClient.Execute<List<BusPrediction>>(request);
+
+            return response.Data;
         }
     }
 }
