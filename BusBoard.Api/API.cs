@@ -51,7 +51,6 @@ namespace BusBoard.Api
 
         static List<BusPrediction> GetBusPredictions(string stopPoint)
         {
-            // TODO: Add API keys
             var TFLClient = new RestClient("https://api.tfl.gov.uk");
 
             var request = new RestRequest("StopPoint/{id}/Arrivals", Method.GET);
@@ -64,7 +63,6 @@ namespace BusBoard.Api
 
         static List<StopPoint> GetClosestStopPoints(Coordinates coords, int stops)
         {
-            // TODO: Add API keys
             var TFLClient = new RestClient("https://api.tfl.gov.uk");
 
             var request = new RestRequest("StopPoint/", Method.GET);
