@@ -16,8 +16,9 @@
 			{
 				<div class="busBox">
 					<div class="busUnit" style="filter: hue-rotate(@busPrediction.GetHue());">
-						<img src="~/Content/flag-variant.svg" />
+						<img class="flagIcon" src="~/Content/flag-variant.svg" />
 						<img class="busIcon" src="~/Content/bus-side.svg" style="margin-left: @(Math.Min(12, busPrediction.timeToStation/60))em" />
+						<div class="busShadow"></div>
 					</div>
 					<div class="busTime" style="border: 1px solid hsl(@busPrediction.GetHue(), 70%, 50%); color: hsl(@busPrediction.GetHue(), 70%, 50%)">
 						<p class="station">@busPrediction.stationName</p>
