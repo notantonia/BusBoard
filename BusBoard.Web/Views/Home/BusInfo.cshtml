@@ -11,7 +11,7 @@
 	<ol>
 		@foreach (var busPrediction in Model.BusPredictions)
 		{
-			<li>@busPrediction.GetNiceTime()</li>
+			<li>Bus @busPrediction.lineName is arriving at @busPrediction.stationName @busPrediction.GetNiceTime().</li>
 		}
 	</ol>
 </div>

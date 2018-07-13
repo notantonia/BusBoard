@@ -16,8 +16,8 @@ namespace BusBoard.Api
         public string GetNiceTime()
         {
             int timeInMins = (int) Math.Round((double) timeToStation / 60);
-            if (timeInMins == 0) return "Bus is due";
-            else return timeInMins + (timeInMins == 1 ? " minute" : " minutes");
+            if (timeInMins == 0) return "now";
+            else return "in " + timeInMins + (timeInMins == 1 ? " minute" : " minutes");
         }
     }
 }
