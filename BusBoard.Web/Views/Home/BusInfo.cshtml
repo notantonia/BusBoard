@@ -6,12 +6,25 @@
 <h2>BusInfo</h2>
 
 <div class="row">
-	<h3>Bus arrivals near @Model.PostCode</h3>
-
-	<ol>
-		@foreach (var busPrediction in Model.BusPredictions)
-		{
-			<li>Bus @busPrediction.lineName is arriving at @busPrediction.stationName @busPrediction.GetNiceTime().</li>
-		}
-	</ol>
+	@if (Model.ErrorMessage == null)
+	{
+		<h3>Bus arrivals near @Model.PostCode</h3>
+		<ol>
+			@foreach (var busPrediction in Model.BusPredictions)
+			{
+				<li>Bus @busPrediction.lineName is arriving at @busPrediction.stationName @busPrediction.GetNiceTime().</li>
+			}
+		</ol>
+	}
+	else if (Model.PostCode.IsEmpty())
+	{
+		<h1>An error has occurred.</h1>
+		<p>No postcode was entered. Please enter a valid postcode.</p>
+	}
+	else
+	{
+		<h1>An error has occurred.</h1>
+		<p>The postcode entered was <b>@Model.PostCode</b>.</p>
+		<p>@Model.ErrorMessage</p>
+	}
 </div>

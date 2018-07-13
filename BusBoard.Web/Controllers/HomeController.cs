@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using BusBoard.Api;
 using BusBoard.Web.Models;
@@ -19,9 +20,18 @@ namespace BusBoard.Web.Controllers
             // Add some properties to the BusInfo view model with the data you want to render on the page.
             // Write code here to populate the view model with info from the APIs.
             // Then modify the view (in Views/Home/BusInfo.cshtml) to render upcoming buses.
-            List<BusPrediction> busPredictions = API.GetBusPredictions(selection.Postcode, 2, 5);
-            var info = new BusInfo(selection.Postcode, busPredictions);
-            return View(info);
+
+            try
+            {
+                List<BusPrediction> busPredictions = API.GetBusPredictions(selection.Postcode, 2, 5);
+                var info = new BusInfo(selection.Postcode, busPredictions);
+                return View(info);
+            }
+            catch (Exception e)
+            {
+                var info = new BusInfo(selection.Postcode, e.Message);
+                return View(info);
+            }
         }
 
         public ActionResult About()
