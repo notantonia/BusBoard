@@ -121,3 +121,9 @@ textarea {
 	margin-bottom: -8px;
 	animation: bounce-shadow 1s ease-in-out infinite;
 }
+
+.mcmapface {
+	height: 600px;
+	width: 100%;
+	margin: 1em;
+}

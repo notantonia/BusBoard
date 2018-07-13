@@ -15,7 +15,7 @@ namespace BusBoard.Api
         public static List<BusPrediction> GetBusPredictions(string postCode, int stops, int predictions)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
+            
             Coordinates coordinates = GetCoordinates(postCode);
             List<StopPoint> stopPoints = GetClosestStopPoints(coordinates, stops);
 
@@ -30,7 +30,7 @@ namespace BusBoard.Api
             return busPredictions.GetRange(0, Math.Min(predictions, busPredictions.Count));
         }
 
-        static Coordinates GetCoordinates(string postCodeName)
+        public static Coordinates GetCoordinates(string postCodeName)
         {
             var postCodeClient = new RestClient("https://api.postcodes.io");
 
@@ -61,7 +61,7 @@ namespace BusBoard.Api
             return response.Data;
         }
 
-        static List<StopPoint> GetClosestStopPoints(Coordinates coords, int stops)
+        public static List<StopPoint> GetClosestStopPoints(Coordinates coords, int stops)
         {
             var TFLClient = new RestClient("https://api.tfl.gov.uk");
 

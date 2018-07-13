@@ -23,8 +23,12 @@ namespace BusBoard.Web.Controllers
 
             try
             {
-                List<BusPrediction> busPredictions = API.GetBusPredictions(selection.Postcode, 2, 9);
-                var info = new BusInfo(selection.Postcode, busPredictions);
+                List<BusPrediction> busPredictions = API.GetBusPredictions(selection.Postcode, 2, 8);
+                Coordinates coordinates = API.GetCoordinates(selection.Postcode);
+                List<StopPoint> stopPoints = API.GetClosestStopPoints(coordinates, 2);
+
+                var info = new BusInfo(selection.Postcode, busPredictions, stopPoints);
+
                 return View(info);
             }
             catch (Exception e)

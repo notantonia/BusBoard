@@ -7,12 +7,14 @@ namespace BusBoard.Web.ViewModels
     {
         public string PostCode { get; set; }
         public List<BusPrediction> BusPredictions { get; set; }
+        public List<StopPoint> StopPoints { get; set; }
         public string ErrorMessage { get; set; }
 
-        public BusInfo(string postCode, List<BusPrediction> busPredictions)
+        public BusInfo(string postCode, List<BusPrediction> busPredictions, List<StopPoint> stopPoints)
         {
             PostCode = postCode;
             BusPredictions = busPredictions;
+            StopPoints = stopPoints;
         }
 
         public BusInfo(string postCode, string errorMessage)

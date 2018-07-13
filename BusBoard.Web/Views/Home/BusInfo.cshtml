@@ -32,16 +32,37 @@
 		<script language="javascript">
 			setTimeout("location.reload(true);", 30000);
 		</script>
-	}
-	else if (Model.PostCode.IsEmpty())
-	{
-		<h1>An error has occurred.</h1>
-		<p>No postcode was entered. Please enter a valid postcode.</p>
-	}
-	else
-	{
-		<h1>An error has occurred.</h1>
-		<p>The postcode entered was <b>@Model.PostCode</b>.</p>
-		<p>@Model.ErrorMessage</p>
-	}
+
+
+		<div id="map" class="mcmapface"></div>
+		<script>
+			// Initialize and add the map
+			function initMap() {
+				var map = new google.maps.Map(
+					document.getElementById('map'), { zoom: 17, center: { lat: @Model.StopPoints[0].lat, lng: @Model.StopPoints[0].lon } });
+				@foreach (var stopPoint in Model.StopPoints)
+				{
+					<text>
+					new google.maps.Marker({ position: { lat: @stopPoint.lat, lng: @stopPoint.lon }, map: map });
+					</text>
+				}
+			}
+		</script>
+		<script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk-TwwSAWZWW3XAHrNs5Kx4IHUIQY5kJk&callback=initMap">
+		</script>
+
+
+}
+		else if (Model.PostCode.IsEmpty())
+		{
+	<h1>An error has occurred.</h1>
+	<p>No postcode was entered. Please enter a valid postcode.</p>
+		}
+		else
+		{
+	<h1>An error has occurred.</h1>
+	<p>The postcode entered was <b>@Model.PostCode</b>.</p>
+	<p>@Model.ErrorMessage</p>
+		}
 </div>

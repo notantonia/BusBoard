@@ -1,6 +1,6 @@
 ﻿namespace BusBoard.Api
 {
-    class Coordinates
+    public class Coordinates
     {
         public float longitude { get; set; }
         public float latitude { get; set; }
