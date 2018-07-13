@@ -10,6 +10,8 @@ namespace BusBoard.Api
 {
     public class API
     {
+        public const int STATUS_OKAY = 200;
+
         public static List<BusPrediction> GetBusPredictions(string postCode, int stops, int predictions)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -37,7 +39,14 @@ namespace BusBoard.Api
 
             IRestResponse<PostCodeResponse> response = postCodeClient.Execute<PostCodeResponse>(request);
 
-            return response.Data.result;
+            if (response.Data.status == STATUS_OKAY)
+            {
+                return response.Data.result;
+            }
+            else
+            {
+                throw new Exception(response.Data.error);
+            }
         }
 
         static List<BusPrediction> GetBusPredictions(string stopPoint)

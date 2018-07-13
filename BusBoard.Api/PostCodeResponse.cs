@@ -8,6 +8,8 @@ namespace BusBoard.Api
 {
     class PostCodeResponse
     {
+        public int status { get; set; }
         public Coordinates result { get; set; }
+        public string error { get; set; }
     }
 }
