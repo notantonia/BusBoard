@@ -20,7 +20,7 @@ namespace BusBoard.ConsoleApp
                     "Stop: " + prediction.stationName +
                     "\nBus: " + prediction.lineName +
                     "\nTo: " + prediction.destinationName +
-                    "\nIn: " + Math.Round((double)prediction.timeToStation / 60) + " minute(s)\n");
+                    "\nIn: " + prediction.GetNiceTime() + "\n");
             }
 
             Console.Read();
