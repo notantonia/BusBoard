@@ -69,6 +69,7 @@ namespace BusBoard.Api
             request.AddParameter("stopTypes", "NaptanPublicBusCoachTram");
             request.AddParameter("lat", coords.latitude);
             request.AddParameter("lon", coords.longitude);
+            request.AddParameter("radius", 1000);
 
             IRestResponse<StopPointResponse> response = TFLClient.Execute<StopPointResponse>(request);
 
