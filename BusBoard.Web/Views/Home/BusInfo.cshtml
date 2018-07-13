@@ -6,7 +6,7 @@
 <h2>BusInfo</h2>
 
 <div class="row">
-	@if (Model.ErrorMessage == null)
+	@if (Model.ErrorMessage == null && Model.StopPoints.Any())
 	{
 		<h3>
 			Bus arrivals near @Model.PostCode
