@@ -27,7 +27,7 @@ namespace BusBoard.Api
 
             busPredictions = busPredictions.OrderBy(busPrediction => busPrediction.timeToStation).ToList();
 
-            return busPredictions.GetRange(0, predictions);
+            return busPredictions.GetRange(0, Math.Min(predictions, busPredictions.Count));
         }
 
         static Coordinates GetCoordinates(string postCodeName)
@@ -76,7 +76,7 @@ namespace BusBoard.Api
 
             List<StopPoint> stopPoints = response.Data.stopPoints;
             List<StopPoint> orderedStopPoints = stopPoints.OrderBy(stopPoint => stopPoint.distance).ToList();
-            List<StopPoint> twoClosest = orderedStopPoints.GetRange(0, stops);
+            List<StopPoint> twoClosest = orderedStopPoints.GetRange(0, Math.Min(stops, orderedStopPoints.Count));
 
             return twoClosest;
         }

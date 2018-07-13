@@ -23,7 +23,7 @@ namespace BusBoard.Web.Controllers
 
             try
             {
-                List<BusPrediction> busPredictions = API.GetBusPredictions(selection.Postcode, 2, 5);
+                List<BusPrediction> busPredictions = API.GetBusPredictions(selection.Postcode, 2, 9);
                 var info = new BusInfo(selection.Postcode, busPredictions);
                 return View(info);
             }

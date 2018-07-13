@@ -8,14 +8,22 @@
 <div class="row">
 	@if (Model.ErrorMessage == null)
 	{
-		<h3>Bus arrivals near @Model.PostCode</h3>
+		<h3>
+			Bus arrivals near @Model.PostCode
+		</h3>
 		<div id="busTimes">
 			@foreach (var busPrediction in Model.BusPredictions)
 			{
-				<div class="busTime" style="border: 1px solid hsl(@busPrediction.GetHue(), 70%, 50%); color: hsl(@busPrediction.GetHue(), 70%, 50%)">
-					<p class="station">@busPrediction.stationName</p>
-					<p class="line">@busPrediction.lineName</p>
-					<p class="time">@busPrediction.GetNiceTime()</p>
+				<div class="busBox">
+					<div class="busUnit" style="filter: hue-rotate(@busPrediction.GetHue());">
+						<img src="~/Content/flag-variant.svg" />
+						<img class="busIcon" src="~/Content/bus-side.svg" style="margin-left: @(Math.Min(12, busPrediction.timeToStation/60))em" />
+					</div>
+					<div class="busTime" style="border: 1px solid hsl(@busPrediction.GetHue(), 70%, 50%); color: hsl(@busPrediction.GetHue(), 70%, 50%)">
+						<p class="station">@busPrediction.stationName</p>
+						<p class="line">@busPrediction.lineName</p>
+						<p class="time">@busPrediction.GetNiceTime()</p>
+					</div>
 				</div>
 			}
 		</div>
