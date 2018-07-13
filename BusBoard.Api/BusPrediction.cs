@@ -19,5 +19,10 @@ namespace BusBoard.Api
             if (timeInMins == 0) return "now";
             else return "in " + timeInMins + (timeInMins == 1 ? " minute" : " minutes");
         }
+
+        public string GetHue()
+        {
+            return 10 + timeToStation/60 * 11 + "deg";
+        }
     }
 }

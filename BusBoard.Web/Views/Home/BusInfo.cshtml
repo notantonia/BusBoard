@@ -9,15 +9,19 @@
 	@if (Model.ErrorMessage == null)
 	{
 		<h3>Bus arrivals near @Model.PostCode</h3>
-		<ol>
+		<div id="busTimes">
 			@foreach (var busPrediction in Model.BusPredictions)
 			{
-				<li>Bus @busPrediction.lineName is arriving at @busPrediction.stationName @busPrediction.GetNiceTime().</li>
+				<div class="busTime" style="border: 1px solid hsl(@busPrediction.GetHue(), 70%, 50%); color: hsl(@busPrediction.GetHue(), 70%, 50%)">
+					<p class="station">@busPrediction.stationName</p>
+					<p class="line">@busPrediction.lineName</p>
+					<p class="time">@busPrediction.GetNiceTime()</p>
+				</div>
 			}
-		</ol>
+		</div>
 
 		<script language="javascript">
-			setTimeout("location.reload(true);", 10000);
+			setTimeout("location.reload(true);", 30000);
 		</script>
 	}
 	else if (Model.PostCode.IsEmpty())
